@@ -1,0 +1,43 @@
+<div class="container text-center">
+  <h1 class="text-danger">Tic Tac Toe</h1>
+  <div class="selection-div" *ngIf="!gameTypeSelected">
+    <p class="border border-primary"><b>Choose Game Type</b></p>
+    <div class="row">
+      <div class="col-6 col-sm-6"><button class="btn btn-primary btn-block" (click)="gameType(true)">Single Player</button></div>
+      <div class="col-6 col-sm-6"><button class="btn btn-primary btn-block" (click)="gameType(false)">Two Player</button></div>
+    </div>
+  </div>
+  <div class="selection-div" *ngIf="!playerCoin && gameTypeSelected">
+    <p class="border border-primary" *ngIf="computerActive"><b>Choose your token</b></p>
+    <p class="border border-primary" *ngIf="!computerActive"><b>Choose Player 1 token</b></p>
+    <div class="row">
+      <div class="col-6 col-sm-6"><button class="btn btn-primary btn-block" (click)="playerChoice('X')">X</button></div>
+      <div class="col-6 col-sm-6"><button class="btn btn-primary btn-block" (click)="playerChoice('O')">O</button></div>
+    </div>
+  </div>
+  <div *ngIf="gameFull" class="alert alert-primary">
+    <b>Game Over! <span *ngIf="winner && computerActive">{{winner}} wins.</span><span *ngIf="winner == 'Player' && !computerActive">{{winner}} 1 wins.</span><span *ngIf="winner == 'Computer' && !computerActive">Player 2 wins.</span></b>
+  </div>
+  <br>
+  <div *ngIf="playerCoin">
+    <div class="row">
+      <div class="col-6 col-sm-6"><b><span>Player <span *ngIf="!computerActive">1</span>: {{playerCoin}}</span></b></div>
+      <div class="col-6 col-sm-6"><b><span *ngIf="computerActive">Computer: {{computerCoin}}</span><span *ngIf="!computerActive">Player 2: {{computerCoin}}</span></b></div>
+    </div>
+    <br>
+    <div class="row">
+      <div *ngFor="let item of ticTacToe | slice:0:3; let i = index;" class="col-4 col-sm-4" [ngClass]="{'winBox': winRows.indexOf(i) > -1}" (click)="playerTurn(i)">{{item}}
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of ticTacToe | slice:3:6; let i = index;" class="col-4 col-sm-4" [ngClass]="{'winBox': winRows.indexOf(i+3) > -1}" (click)="playerTurn(i+3)">
+        {{item}}</div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of ticTacToe | slice:6:9; let i = index;" class="col-4 col-sm-4" [ngClass]="{'winBox': winRows.indexOf(i+6) > -1}" (click)="playerTurn(i+6)">
+        {{item}}</div>
+    </div>
+    <br>
+  </div>
+  <button *ngIf="gameTypeSelected" class="btn btn-primary" (click)="resetGame()">Reset Game</button>
+</div>

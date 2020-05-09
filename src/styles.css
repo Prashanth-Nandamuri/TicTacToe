@@ -1,0 +1,12 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.col-sm-4 {
+    border: 1px solid black;
+    min-height: 30px;
+}
+.selection-div {
+    padding: 5px;
+}
+
+.winBox {
+    background-color: aquamarine;
+}
